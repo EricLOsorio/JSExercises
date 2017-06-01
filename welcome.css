@@ -12,18 +12,17 @@
 
 #personalGreeting{
 	display:block;
-	width:500px;
+	width:900px;
 	height:300px;
-	border:1px solid blue;
 	font-size:5em;
 	text-align:center;
 	margin-top:150px;
-	margin-left:550px;
+	margin-left:350px;
 	animation: slideGreeting 5s;
 }
 
 @keyframes slideGreeting {
-	0% {margin-left:-600px;}
+	0% {margin-left:-900px;}
 
-	100%{margin-left:550px;}
+	100%{margin-left:350px;}
 }
