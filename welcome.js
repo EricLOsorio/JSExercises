@@ -17,7 +17,7 @@ window.onload=(function(){
   	};
 
   	if(index!==localStorage.length){
-        perfObj=JSON.parse(localStorage.getItem('pagePreferences'));
+      perfObj=JSON.parse(localStorage.getItem('pagePreferences'));
   		document.body.style.backgroundColor=perfObj['backgroundColor'];
       personal.innerHTML=perfObj['greeting'];
       document.body.style.fontFamily="'"+perfObj['font']+"'";
