@@ -1,0 +1,50 @@
+ul{
+  position:relative;
+  list-style: none;
+
+}
+
+li{
+
+  display:inline-block;
+}
+
+input{
+  display:none;
+}
+
+label{
+
+  border:1px solid black;
+  padding:15px;
+}
+
+.tabContent{
+  position:absolute;
+  display:none;
+  width:800px;
+  height:600px;
+  margin-top:14px;
+
+  border:1px solid black;
+}
+
+div[id$="-2"]{
+  margin-left:-86px;
+}
+
+div[id$="-3"]{
+  margin-left:-172px;
+}
+
+div[id$="-4"]{
+  margin-left:-257px;
+}
+
+div[id$="-5"]{
+  margin-left:-343px;
+}
+
+li>input:checked + div{
+  display:block;
+}
