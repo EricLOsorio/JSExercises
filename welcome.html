@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Selectable Preferences Page</title>
+	<link rel="stylesheet" type="text/css" href="welcome.css">
+</head>
+<body>
+  <div id="selectionBlock">
+    <h1>Selectable Preferences Example Page</h1>
+  
+    <label>Preferences</label>
+    <button id="showChoices">Click</button>
+
+
+	  <form id="preferences">
+        <p>Click submit button to refresh the page and see your applied preferences</p>	  
+	    <label>Greeting</label>
+	    <input type="text" id='greeting' placeholder="Type your greeting here">
+	    <label>Background</label>
+	    <select id='background-color'>
+	      <option>blue</option>
+	      <option>red</option>
+	      <option>yellow</option>
+	      <option>orange</option>
+	    </select>
+	    <label>Fonts</label>
+	    <select id='fonts'>
+	      <option>Impact</option>
+	      <option>Georgia</option>
+	      <option>Garamond</option>
+	      <option>Helvetica</option>
+	      <option>Comic Sans</option>
+	    </select>
+	    <select id='size'>
+	      <option>Large</option>
+	      <option>Medium</option>
+	      <option>Small</option>
+	    </select> 
+
+	    <input type="submit" value="Submit" id="submit">
+
+	  </form>
+  </div>
+
+  <div id="personalGreeting">Test</div>
+
+  <script type="text/javascript" src="welcome.js"></script>
+</body>
+</html>

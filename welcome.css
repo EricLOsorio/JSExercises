@@ -1,0 +1,29 @@
+#preferences{
+  display:none;
+  margin-top:50px;
+}
+
+#selectionBlock{
+	display:inline-block;
+	margin-left:25%;
+	width:800px;
+	text-align:center;
+}
+
+#personalGreeting{
+	display:block;
+	width:500px;
+	height:300px;
+	border:1px solid blue;
+	font-size:5em;
+	text-align:center;
+	margin-top:150px;
+	margin-left:550px;
+	animation: slideGreeting 5s;
+}
+
+@keyframes slideGreeting {
+	0% {margin-left:-600px;}
+
+	100%{margin-left:550px;}
+}
