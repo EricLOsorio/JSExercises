@@ -8,3 +8,6 @@ JavasScript Exercises Repo
 # localStorage Assigment
 ## https://ericlosorio.github.io/JSExercises/welcome.html
 
+
+# indexedDB Assigment
+## https://ericlosorio.github.io/JSExercises/friendsDB.html
