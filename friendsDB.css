@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+}
+
+h1{
+  margin-left:45%;
+}
+
+ th{
+  padding:0 100px;
+  border:1px solid black;
+}
+
+ td{
+   text-align: center;
+   border:1px solid black;
+ }
+
+ tr{
+   border:1px solid black;
+ }
+
+#list{
+  display:block;
+  border:1px solid black;
+  width:900px;
+  margin-left:25%;
+}
+
+#update{
+	padding:0 20px;
+	margin-top:50px;
+	margin-left:50%;
+}
+
+input[type="text"]{
+	text-align:center;
+	/*border:none;***********************************/
+	font-size:1.1em;
+	font-family:Georgia;
+	/*border:1px solid red;******************************/
+}
+
+input:focus{
+  border:1px solid blue;
+}
