@@ -1,11 +1,11 @@
 window.onload=(function(){
 
-//Global variables for the submit and update buttons
-  var submit=document.getElementById('submit');
-  var update=document.getElementById('update');
+//Global letiables for the submit and update buttons
+  let submit=document.getElementById('submit');
+  let update=document.getElementById('update');
 
-//Global variable for array of initial keys that will get stored in session storage
-  var initKeyArray=[];
+//Global letiable for array of initial keys that will get stored in session storage
+  let initKeyArray=[];
 
 
 /****************This block gets called at the end of the successful execution of getting all records*****************************/
@@ -13,37 +13,37 @@ window.onload=(function(){
 
 function deletes(){
 
-  var allDeletes=document.getElementsByClassName('delete');  //get all the delet buttons
+  let allDeletes=document.getElementsByClassName('delete');  //get all the delet buttons
 
 
-  for(var i=0;i<allDeletes.length;i++){ //monitors all the delete buttons to determine which has been clicked
+  for(let i=0;i<allDeletes.length;i++){ //monitors all the delete buttons to determine which has been clicked
 
-    allDeletes[i].addEventListener('click',function(event){ //event listener to trigger function when a delete button is clicked
+    allDeletes[i].addEventListener('click',event =>{ //event listener to trigger function when a delete button is clicked
 
-  	var request=window.indexedDB.open('myDB',1); //open sub request for database, will be used for deletions
+  	let request=window.indexedDB.open('myDB',1); //open sub request for database, will be used for deletions
 
-    var indx=event.target.getAttribute('id'); //variable that will hold the id of the clicked element, which will be the same as the record key for the intended record
+    let indx=event.target.getAttribute('id'); //letiable that will hold the id of the clicked element, which will be the same as the record key for the intended record
 
-    document.cookie=('deleteIndexCookie='+indx); //cookie holding the id which equals the key number of the record that was clicked for deletion
+    document.cookie=(`deleteIndexCookie=${indx}`); //cookie holding the id which equals the key number of the record that was clicked for deletion
 
-    var cookieString=document.cookie; //get the cookie into a string
+    let cookieString=document.cookie; //get the cookie into a string
 
-    var cookieStr=cookieString.split('='); //split the string to separate cookie name from its value, the value is the records key marked for deletion
+    let cookieStr=cookieString.split('='); //split the string to separate cookie name from its value, the value is the records key marked for deletion
 
 
-    request.onsuccess=function(event){ //on success of database request opening, get everything ready for deletion of intended record
-    	var db=event.target.result, //db opening
+    request.onsuccess=(event)=>{ //on success of database request opening, get everything ready for deletion of intended record
+    	let db=event.target.result, //db opening
     	    trans=db.transaction('friends','readwrite'), //transaction specification needs readwrite in order to do deletions
     	    objStore=trans.objectStore('friends'), //ojbect store holding records
     	    del=objStore.delete(parseInt(cookieStr[1])); //delete the record marked for deletion per the cookie string value previously stored
 
-    	  del.onsuccess=function(event){  //on a successful deletion of a record
+    	  del.onsuccess=(event)=>{  //on a successful deletion of a record
 
-          var keysFromStorage=sessionStorage.getItem('initialKeys'); //get the string of array of keys for the current list of records on the page
+          let keysFromStorage=sessionStorage.getItem('initialKeys'); //get the string of array of keys for the current list of records on the page
 
-          var initialKeysArray=JSON.parse(keysFromStorage); //convert the string to an actual array
+          let initialKeysArray=JSON.parse(keysFromStorage); //convert the string to an actual array
 
-          var toDelete=initialKeysArray.indexOf(parseInt(cookieStr[1]));//the array element matching the cookie (key of deleted record) will also be deleted from the session storage tracking current list of records keys
+          let toDelete=initialKeysArray.indexOf(parseInt(cookieStr[1]));//the array element matching the cookie (key of deleted record) will also be deleted from the session storage tracking current list of records keys
 
           initialKeysArray.splice(toDelete,1); //delete the key number of record deleted from the tracking array
 
@@ -67,9 +67,9 @@ function deletes(){
 /*********************This block is used to lock or unlock the records for updates*********************************/
 
   function updateableRecords(choice){ //choice=true will prevent records from being modified 
-  	var	allInputs=document.getElementsByTagName('INPUT');
+  	let	allInputs=document.getElementsByTagName('INPUT');
 
-	      for(var i=0;i<allInputs.length;i++){
+	      for(let i=0;i<allInputs.length;i++){
 	      	allInputs[i].readOnly=choice;
 	      };
 
@@ -79,12 +79,12 @@ function deletes(){
 	      
   };
 
-  submit.addEventListener('click',function(event){ //submit click will lock inputs to readonly
+  submit.addEventListener('click',event=>{ //submit click will lock inputs to readonly
          updateableRecords(true);
   	
   });
 
-  update.addEventListener('click',function(event){ //update click will unlock inputs to be modified
+  update.addEventListener('click',event=>{ //update click will unlock inputs to be modified
   	updateableRecords(false);
   });
 
@@ -93,25 +93,25 @@ function deletes(){
 
   if('indexedDB' in window) { //check to see if indexedDB is supported
 
-  	var request=window.indexedDB.open('myDB',1); 
+  	let request=window.indexedDB.open('myDB',1); 
 
 /********************************************Block for initial creation of objectStore*******************************/
 
-    request.onupgradeneeded = function(event){
+    request.onupgradeneeded = event=>{
 
-      var db = event.target.result;
+      let db = event.target.result;
 
-      var objectStore = db.createObjectStore('friends');
+      let objectStore = db.createObjectStore('friends');
 
 
-      objectStore.transaction.oncomplete = function(event){
-        var transaction = db.transaction('friends','readwrite'),
+      objectStore.transaction.oncomplete = event=>{
+        let transaction = db.transaction('friends','readwrite'),
             objectStore = transaction.objectStore('friends'),
             friends = [{name:'john', email:'john@j.com',phone:'444-444-4444'},{name:'mike', email:'mike@m.com',phone:'333-333-3333'},{name:'maria', email:'maria@j.com',phone:'222-444-4444'},{name:'mimi', email:'mimi@m.com',phone:'111-333-3333'},{name:'Karl', email:'karl@k.com',phone:'111-222-3333'}];
 
-        var listBody=document.getElementById('listBody');
+        let listBody=document.getElementById('listBody');
 
-        friends.forEach(function(friend,index){ //use index of the array element object ask key
+        friends.forEach((friend,index)=>{ //use index of the array element object ask key
 
           objectStore.add(friend,index);
 
@@ -127,29 +127,29 @@ function deletes(){
 
 /****************************Block for successful opening of DB********************************/
 
-  	request.onsuccess = function(event){
-  		var db=event.target.result,
+  	request.onsuccess = event=>{
+  		let db=event.target.result,
             transaction = db.transaction('friends', 'readonly'),
         	objectStore = transaction.objectStore('friends'),
         	getRequest = objectStore.getAll(),                   //get all records
         	listBody=document.getElementById('listBody');
 
-  		getRequest.onsuccess = function(event) { //create all elements where to show records on page
+  		getRequest.onsuccess = event=> { //create all elements where to show records on page
 
-        var keysFromStorage=sessionStorage.getItem('initialKeys'); //keys will be used for delete button ids
+        let keysFromStorage=sessionStorage.getItem('initialKeys'); //keys will be used for delete button ids
 
-        var initialKeysArray=JSON.parse(keysFromStorage); //turn string of keys into acual arrays
+        let initialKeysArray=JSON.parse(keysFromStorage); //turn string of keys into acual arrays
 
         console.log(initialKeysArray);
 
   			for(records in event.target.result){ 
 
-  			  var newRow=document.createElement('TR');
+  			  let newRow=document.createElement('TR');
 
-  			  var deleteButtonCell=document.createElement('TD');
-  			  var updateButtonCell=document.createElement('TD');
+  			  let deleteButtonCell=document.createElement('TD');
+  			  let updateButtonCell=document.createElement('TD');
 
-  			  var deleteButton=document.createElement('BUTTON');
+  			  let deleteButton=document.createElement('BUTTON');
 
 
   			  deleteButton.className="delete";
@@ -168,8 +168,8 @@ function deletes(){
 
   			  for(fields in event.target.result[records]){
 
-  			    var cell=document.createElement('TD');
-  			    var inputField=document.createElement('INPUT');
+  			    let cell=document.createElement('TD');
+  			    let inputField=document.createElement('INPUT');
 
   				inputField.setAttribute('type','text');
   				inputField.setAttribute('readonly','true');
@@ -196,17 +196,17 @@ function deletes(){
 
  /***********************Block on error opening the Database**********************************************/   
 
-  	request.onerror = function(event){
+  	request.onerror = event=>{
   		console.log('error',event.target.errorCode);
   	}
 /*********************************************************************************************************/
 
 /****************************************SUBMIT BLOCK***************************************************/
-    submit.addEventListener('click',function(event){
-      var putRequest=window.indexedDB.open('myDB',1); //open db specifically for modification
+    submit.addEventListener('click',event=>{
+      let putRequest=window.indexedDB.open('myDB',1); //open db specifically for modification
 
-      putRequest.onsuccess=function(event){  //get ready for modification of the 'frieds' objectStore
-        var db=event.target.result,
+      putRequest.onsuccess=event=>{  //get ready for modification of the 'frieds' objectStore
+        let db=event.target.result,
             transaction=db.transaction('friends','readwrite'),
             objectStore=transaction.objectStore('friends'),
             
@@ -215,22 +215,22 @@ function deletes(){
             getRequest=objectStore.getAll(); //get all records
 
 
-      getRequest.onsuccess = function(event) { //on successfull getting of all records  modify them
+      getRequest.onsuccess = event=> { //on successfull getting of all records  modify them
 
-        var keysFromStorage=sessionStorage.getItem('initialKeys'); //get the keys of records on the page
+        let keysFromStorage=sessionStorage.getItem('initialKeys'); //get the keys of records on the page
 
-        var initialKeysArray=JSON.parse(keysFromStorage); //turn record keys for records on page into array
+        let initialKeysArray=JSON.parse(keysFromStorage); //turn record keys for records on page into array
 
         for(records in event.target.result){ //go through each record and modify them per the value in each of the relevant row elements
-        var rowInputs=allRows[records].getElementsByTagName('INPUT');
-        var rowObj=new Object(),
+        let rowInputs=allRows[records].getElementsByTagName('INPUT');
+        let rowObj=new Object(),
           allInputs=document.getElementsByTagName('INPUT');
       
           rowObj.name=rowInputs[0].value;
           rowObj.email=rowInputs[1].value;
           rowObj.phone=rowInputs[2].value;  
 
-        var update=objectStore.put(rowObj, parseInt(initialKeysArray[records]));//modify  the record
+        let update=objectStore.put(rowObj, parseInt(initialKeysArray[records]));//modify  the record
 
 
         }
