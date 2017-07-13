@@ -160,7 +160,7 @@ function deletes(){
 
   			  deleteButtonCell.appendChild(deleteButton);
 
-          console.log(`this is record ${record}`);
+          console.log(`this is record ${records}`);
 
 //          deleteButton.setAttribute('id',initialKeysArray[records]);          
 
