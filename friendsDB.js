@@ -156,9 +156,10 @@ function deletes(){
 
   			  deleteButton.innerHTML="delete";
 
-          deleteButton.setAttribute('id',initialKeysArray[records]);
 
   			  deleteButtonCell.appendChild(deleteButton);
+
+          deleteButton.setAttribute('id',initialKeysArray[records]);          
 
 
 
