@@ -141,7 +141,7 @@ function deletes(){
         var initialKeysArray=JSON.parse(keysFromStorage); //turn string of keys into acual arrays
 
         console.log(initialKeysArray);
-        
+
   			for(records in event.target.result){ 
 
   			  var newRow=document.createElement('TR');
@@ -159,6 +159,8 @@ function deletes(){
 
 
   			  deleteButtonCell.appendChild(deleteButton);
+
+          console.log(`this is record ${record}`);
 
 //          deleteButton.setAttribute('id',initialKeysArray[records]);          
 
