@@ -162,7 +162,7 @@ function deletes(){
 
           console.log(`this is record ${initialKeysArray[records]}`);
 
-//          deleteButton.setAttribute('id',initialKeysArray[records]);          
+         deleteButton.setAttribute('id',`${initialKeysArray[records]}`);          
 
 
 
