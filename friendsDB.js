@@ -159,7 +159,7 @@ function deletes(){
 
   			  deleteButtonCell.appendChild(deleteButton);
 
-          deleteButton.setAttribute('id',initialKeysArray[records]);          
+//          deleteButton.setAttribute('id',initialKeysArray[records]);          
 
 
 
