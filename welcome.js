@@ -1,27 +1,41 @@
 window.onload=(function(){
-  var choices=document.getElementById("showChoices");
-  var formBlock=document.getElementById("preferences");
-  var submit=document.getElementById('submit');
-	var perfObj={};
-  var index=0;
+  let choices=document.getElementById("showChoices");
+  let formBlock=document.getElementById("preferences");
+  let submit=document.getElementById('submit');
 
-  var greeting=document.getElementById('greeting');
-  var backgroundColor=document.getElementById('background-color');
-  var fonts=document.getElementById('fonts');
-  var size=document.getElementById('size');
-  var personal=document.getElementById('personalGreeting');
+//The perfObj was used prior to using a Map  
+//	let perfObj={};
+
+  let index=0;
+
+  let greeting=document.getElementById('greeting');
+  let backgroundColor=document.getElementById('background-color');
+  let fonts=document.getElementById('fonts');
+  let size=document.getElementById('size');
+  let personal=document.getElementById('personalGreeting');
 
 
   while(index<localStorage.length && localStorage.key(index)!=='pagePreferences'){
       index++;
   	};
 
+
   	if(index!==localStorage.length){
-      perfObj=JSON.parse(localStorage.getItem('pagePreferences'));
-  		document.body.style.backgroundColor=perfObj['backgroundColor'];
+      perfObj=new Map(JSON.parse(localStorage.getItem('pagePreferences')));
+
+
+// Alternative code pre ES2015
+  		/*document.body.style.backgroundColor=perfObj['backgroundColor'];
       personal.innerHTML=perfObj['greeting'];
       document.body.style.fontFamily="'"+perfObj['font']+"'";
-      document.body.style.fontSize=perfObj['size'];
+      document.body.style.fontSize=perfObj['size'];*/
+
+
+      document.body.style.backgroundColor=perfObj.get('backgroundColor');
+      personal.innerHTML=perfObj.get('greeting');
+      document.body.style.fontFamily=`'${perfObj.get('font')}'`;
+      document.body.style.fontSize=perfObj.get('size');      
+
 
   	};
 
@@ -34,7 +48,7 @@ window.onload=(function(){
   	el.style.display='none';
   }
 
-  choices.addEventListener('click',function(event){ 
+  choices.addEventListener('click', event=>{ 
  	if(window.getComputedStyle(formBlock,null).getPropertyValue('display')==='none'){ 
  		showPref(formBlock);
  	} else { 
@@ -43,14 +57,24 @@ window.onload=(function(){
 
   })
 
-  submit.addEventListener('click',function(e){
+  submit.addEventListener('click',e=>{
 
+      let perfObj= new Map();  //ES2015 Code
 
+//Pre ES2015 Code      
+
+/*
   	perfObj['greeting']=greeting.value; 
     perfObj['backgroundColor']=backgroundColor.value; 
   	perfObj['font']=fonts.value;
   	perfObj['size']=size.value;
-    localStorage.setItem('pagePreferences',JSON.stringify(perfObj));
+    localStorage.setItem('pagePreferences',JSON.stringify(perfObj));*/
+
+    perfObj.set('greeting',`${greeting.value}`);
+    perfObj.set('backgroundColor',`${backgroundColor.value}`);
+    perfObj.set('font',`${fonts.value}`);
+    perfObj.set('size',`${size.value}`);
+    localStorage.setItem('pagePreferences',JSON.stringify([...perfObj]));
 
 
   	window.location.reload();
