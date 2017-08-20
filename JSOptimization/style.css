@@ -1,0 +1,16 @@
+#divs div, #clonedDivs div{
+  position:relative;
+  display: inline-block;
+  margin:5px;
+  margin-top:50px;
+  height:20px;
+  width:30px;
+  border:1px solid black;
+}
+
+
+button {
+	position:absolute;
+	top:60px;
+
+}
